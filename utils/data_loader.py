@@ -1,8 +1,11 @@
-
 import pandas as pd
 
 def load_student_data(file_path):
-    return pd.read_csv(file_path)
+    data = pd.read_csv(file_path)
+    # Extract department from the USN
+    data['department'] = data['usn'].apply(lambda usn: usn[5:7].upper())
+    data = data.sort_values(by=['department', 'usn'])
+    return data
 
-def filter_students_by_department(student_df, departments):
-    return student_df[student_df['department'].isin(departments)]
+def group_students_by_department(student_df):
+    return student_df.groupby('department')

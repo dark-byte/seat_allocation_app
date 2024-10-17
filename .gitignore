@@ -1,1 +1,3 @@
 data/students.csv
+venv
+*/__pycache__
